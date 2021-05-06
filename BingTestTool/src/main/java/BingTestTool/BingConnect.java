@@ -51,10 +51,10 @@ public class BingConnect {
             }
         }
         catch (MalformedURLException e) {
-            e.printStackTrace();
+            System.err.println("Malformed URL Exception: " + e);
         }
         catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("I/O Exception: " + e);
         }
         
         return sb.toString();

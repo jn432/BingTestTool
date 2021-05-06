@@ -20,14 +20,54 @@ public class WordGeneratorTest {
     }
 
     //Test to check if we can get html from the website
+    //Testing all 4 possible inputs
     @Test
     public void testGetHTML() {
-        assertFalse(test.getHTML().isEmpty());
+        assertFalse(test.getHTML("").isEmpty());
+    }
+    @Test
+    public void testGetHTMLNoun() {
+        assertFalse(test.getHTML("noun").isEmpty());
+    }
+    @Test
+    public void testGetHTMLVerb() {
+        assertFalse(test.getHTML("verb").isEmpty());
+    }
+    @Test
+    public void testGetHTMLAdjective() {
+        assertFalse(test.getHTML("adjective").isEmpty());
     }
 
-    //Test to check if we get a word from the website
+    //Tests to check if we get a word from the website
+    //Checking to handle all sorts of inputs
     @Test
     public void testGetWord() {
         assertFalse(this.test.generateWord().isEmpty());
     }
+    
+    @Test
+    public void testGetWordEmptyString() {
+        assertFalse(this.test.generateWord("").isEmpty());
+    }
+    
+    @Test
+    public void testGetWordNoun() {
+        assertFalse(this.test.generateWord("noun").isEmpty());
+    }
+    
+    @Test
+    public void testGetWordVerb() {
+        assertFalse(this.test.generateWord("verb").isEmpty());
+    }
+    
+    @Test
+    public void testGetWordAdjective() {
+        assertFalse(this.test.generateWord("adjective").isEmpty());
+    }
+    
+    @Test
+    public void testGetWordJunkInput() {
+        assertFalse(this.test.generateWord("ajfnafbafna").isEmpty());
+    }
+    
 }
