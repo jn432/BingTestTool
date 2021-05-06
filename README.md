@@ -1,3 +1,3 @@
 # CSIT314-Project
 
-<Insert instructions here>
+Insert instructions here
