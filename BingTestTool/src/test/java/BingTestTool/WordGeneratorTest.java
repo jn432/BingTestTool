@@ -25,9 +25,9 @@ public class WordGeneratorTest {
         assertFalse(test.getHTML().isEmpty());
     }
 
-    //Test to check if we get at least 1 word
+    //Test to check if we get a word from the website
     @Test
-    public void testGetWords() {
-        assertTrue(this.test.getWords().size() > 0);
+    public void testGetWord() {
+        assertFalse(this.test.generateWord().isEmpty());
     }
 }

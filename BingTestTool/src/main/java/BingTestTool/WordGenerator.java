@@ -3,15 +3,11 @@ package BingTestTool;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 public class WordGenerator {
-    
-    protected ArrayList<String> words;
-    
-    //Constructor
-    public WordGenerator() {
-        this.words = new ArrayList<>();
-    }
     
     //Connects to the word generator website and gets the HTML
     protected String getHTML() {
@@ -19,7 +15,7 @@ public class WordGenerator {
         //Connect to website
         try {
             //open connection word generator website
-            URL url = new URL("https://wordcounter.net/random-word-generator");
+            URL url = new URL("https://randomword.com/noun");
             URLConnection con = url.openConnection();
             InputStream stream = con.getInputStream();
             
@@ -40,14 +36,12 @@ public class WordGenerator {
         return sb.toString();
     }
     
-    public void generateWords() {
-        String html = this.getHTML();
-        
+    public String generateWord() {
+        //Get html of website and put it as a Document for jsoup to parse
+        Document doc = Jsoup.parse(this.getHTML());
+        //get the randomly generated word in the document
+        String word =  doc.select("#random_word").first().text();
+        System.out.println(word);
+        return word;
     }
-    
-    //Getters
-    public ArrayList<String> getWords() {
-        return words;
-    }
-    
 }
