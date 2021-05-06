@@ -2,10 +2,8 @@ package BingTestTool;
 
 import java.io.*;
 import java.net.*;
-import java.util.ArrayList;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 
 public class WordGenerator {
     
@@ -15,7 +13,7 @@ public class WordGenerator {
         //Connect to website
         try {
             //open connection word generator website
-            URL url = new URL("https://randomword.com/noun");
+            URL url = new URL("https://randomword.com/3-word-quotes");
             URLConnection con = url.openConnection();
             InputStream stream = con.getInputStream();
             
