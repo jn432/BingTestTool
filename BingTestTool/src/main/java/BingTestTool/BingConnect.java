@@ -16,25 +16,36 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 
-public class SiteConnect {
+public class BingConnect {
     
-    //Encode the string to comply with URL standards and return the search link
-    public static String encodeURL(String link, String searchTerm) {
-        String encoded = URLEncoder.encode(searchTerm, StandardCharsets.UTF_8);
-        return link + encoded;
+    protected String searchTerm;
+    
+    //constructor that takes a String for the search terms
+    public BingConnect(String searchTerm) {
+        this.searchTerm =searchTerm;
+    }
+    
+    //default constructor
+    public BingConnect() {
+        this.searchTerm = "";
+    }
+    
+    
+    //Encode the string that will be used to Bing search
+    protected String encodeURL() {
+        String encoded = URLEncoder.encode(this.searchTerm, StandardCharsets.UTF_8);
+        return "https://www.bing.com/search?q=" + encoded;
     }
     
     //Connect to webpage and get HTML data
-    public static String getWebpageHTML(String link, String searchTerm) {
-        //encode the link to be used
-        String encoded = encodeURL(link, searchTerm);
+    protected String getWebpageHTML() {
         
         StringBuilder sb = new StringBuilder();
         
         //Connect to the webpage
         try {
             //open connection to that page
-            URL url = new URL(encoded);
+            URL url = new URL(this.encodeURL());
             URLConnection con = url.openConnection();
             InputStream stream = con.getInputStream();
             
@@ -59,12 +70,12 @@ public class SiteConnect {
     //examples that worked during testing
     //Google - "a > h3"
     //Bing - "#b_results > li.b_algo > h2 > a"
-    public static ArrayList<String> parseHTML(String html, String selector) {
+    public ArrayList<String> parseHTML() {
         ArrayList<String> results = new ArrayList<>();
         
         //Parse html and find all elements matching the selector
-        Document doc = Jsoup.parse(html);
-        Elements elements = doc.select(selector);
+        Document doc = Jsoup.parse(this.getWebpageHTML());
+        Elements elements = doc.select("#b_results > li.b_algo > h2 > a");
         
         //print out all links
         elements.forEach(element -> {
@@ -73,6 +84,18 @@ public class SiteConnect {
             results.add(str);
         });
         return results;
+    }
+    
+    //Setters
+    
+    public void setSearchTerm(String searchTerm) {
+        this.searchTerm = searchTerm;
+    }
+    
+    //Getters
+    
+    public String getSearchTerm() {
+        return this.searchTerm;
     }
     
 }
