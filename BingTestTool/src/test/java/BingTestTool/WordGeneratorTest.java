@@ -45,11 +45,14 @@ public class WordGeneratorTest {
         assertFalse(this.test.generateWord().isEmpty());
     }
     
+    //An empty string should return a random word
     @Test
     public void testGetWordEmptyString() {
         assertFalse(this.test.generateWord("").isEmpty());
     }
     
+    //It is a little hard to check whether these are nouns, verbs or adjectives
+    //A println is left in the code to check, remove at final release
     @Test
     public void testGetWordNoun() {
         assertFalse(this.test.generateWord("noun").isEmpty());
@@ -65,6 +68,7 @@ public class WordGeneratorTest {
         assertFalse(this.test.generateWord("adjective").isEmpty());
     }
     
+    //Junk inputs should still generate a word based on design
     @Test
     public void testGetWordJunkInput() {
         assertFalse(this.test.generateWord("ajfnafbafna").isEmpty());
