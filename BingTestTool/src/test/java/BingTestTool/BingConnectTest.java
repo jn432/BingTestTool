@@ -1,10 +1,9 @@
 package BingTestTool;
 
 import org.junit.After;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-
+import static org.junit.Assert.*;
 
 public class BingConnectTest {
     
@@ -65,35 +64,35 @@ public class BingConnectTest {
     
     //HTML scraping tests
     @Test
-    public void testParse() {
+    public void testGetSearchTitles() {
         this.test.setSearchTerm("youtube");
-        assertFalse(this.test.parseHTML().isEmpty());
+        assertFalse(this.test.getSearchTitles().isEmpty());
     }
     
     @Test
-    public void testParseMultipleTerms() {
+    public void testGetSearchTitlesMultipleTerms() {
         this.test.setSearchTerm("university of western sydney");
-        assertFalse(this.test.parseHTML().isEmpty());
+        assertFalse(this.test.getSearchTitles().isEmpty());
     }
     
     @Test
-    public void testParseAlphanumeric() {
+    public void testGetSearchTitlesAlphanumeric() {
         this.test.setSearchTerm("C# test driven development");
-        assertFalse(this.test.parseHTML().isEmpty());
+        assertFalse(this.test.getSearchTitles().isEmpty());
     }
     
     //This one should return nothing, junk input
     @Test
-    public void testParseJunk() {
+    public void testGetSearchTitlesJunkInput() {
         this.test.setSearchTerm("bafbanavnealvmeavmafnemoeavmaomakalvalnvjanv");
-        assertTrue(this.test.parseHTML().isEmpty());
+        assertTrue(this.test.getSearchTitles().isEmpty());
     }
     
     //This one should also be empty, no search term
     @Test
-    public void testParseEmpty() {
+    public void testGetSearchTitlesEmptyString() {
         this.test.setSearchTerm("");
-        assertTrue(this.test.parseHTML().isEmpty());
+        assertTrue(this.test.getSearchTitles().isEmpty());
     }
-
+    
 }

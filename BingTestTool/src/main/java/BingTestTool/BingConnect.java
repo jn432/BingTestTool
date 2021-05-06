@@ -1,14 +1,8 @@
 package BingTestTool;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
+import java.io.*;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import org.jsoup.Jsoup;
@@ -70,18 +64,18 @@ public class BingConnect {
     //examples that worked during testing
     //Google - "a > h3"
     //Bing - "#b_results > li.b_algo > h2 > a"
-    public ArrayList<String> parseHTML() {
+    public ArrayList<String> getSearchTitles() {
         ArrayList<String> results = new ArrayList<>();
         
         //Parse html and find all elements matching the selector
         Document doc = Jsoup.parse(this.getWebpageHTML());
         Elements elements = doc.select("#b_results > li.b_algo > h2 > a");
         
-        //print out all links
+        //add all text links to results
         elements.forEach(element -> {
-            String str = element.text() + " - " + element.attr("href");
-            System.out.println(str);
-            results.add(str);
+            //printing out for testing purposes
+            //System.out.println(element.text() + " - " + element.attr("href"));
+            results.add(element.text());
         });
         return results;
     }
