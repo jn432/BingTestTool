@@ -5,14 +5,14 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class BingConnectTest {
+public class BingParserTest {
     
-    private BingConnect test;
+    private BingParser test;
 
     //Create and destroy object before and after the test
     @Before
     public void setUp() throws Exception {
-        this.test = new BingConnect();
+        this.test = new BingParser();
     }
 
     @After

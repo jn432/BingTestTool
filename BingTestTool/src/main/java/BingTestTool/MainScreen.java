@@ -67,7 +67,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     //When button1 is pressed, search "surprise" in bing
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        BingConnect bc = new BingConnect("surprise");
+        BingParser bc = new BingParser("surprise");
         ArrayList<String> results = bc.getSearchTitles();
         results.forEach(title -> {
             System.out.println(title);

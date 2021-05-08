@@ -10,17 +10,17 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 
-public class BingConnect {
+public class BingParser {
     
     protected String searchTerm;
     
     //constructor that takes a String for the search terms
-    public BingConnect(String searchTerm) {
+    public BingParser(String searchTerm) {
         this.searchTerm =searchTerm;
     }
     
     //default constructor
-    public BingConnect() {
+    public BingParser() {
         this.searchTerm = "";
     }
     
