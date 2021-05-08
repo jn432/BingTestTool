@@ -56,6 +56,5 @@ public class WordGenerator {
         String word =  doc.select("#random_word").first().text();
         System.out.println(word);
         return word;
-    }
-    
+    }   
 }
