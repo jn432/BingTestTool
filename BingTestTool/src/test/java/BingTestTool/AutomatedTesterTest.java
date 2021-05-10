@@ -24,6 +24,7 @@ public class AutomatedTesterTest {
         assertTrue(test.evaluateResult("fantasia", "Fantasia (1940 film) - Wikipedia"));
     }
     
+    @Test
     public void testEvaluateResultMultipleWords() {
         assertTrue(test.evaluateResult("red dragon fruit", "Dragon Fruit: Nutrition, Benefits, and How to Eat It - Healthline"));
     }
