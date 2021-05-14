@@ -8,25 +8,42 @@ import static org.junit.Assert.*;
 public class AutomatedTesterTest {
     
     private AutomatedTester test;
+    private BingParser bp;
     
     @Before
     public void setUp() {
         this.test = new AutomatedTester();
+        this.bp = new BingParser();
     }
     
     @After
     public void tearDown() {
         this.test = null;
+        this.bp = null;
     }
 
+    //basic test
     @Test
     public void testEvaluateResult() {
-        assertTrue(test.evaluateResult("fantasia", "Fantasia (1940 film) - Wikipedia"));
+        String searchTerm = "fantasia";
+        bp.setSearchTerm(searchTerm);
+        assertTrue(test.evaluateResultTest(searchTerm, bp.getSearchTitles().get(0)));
     }
     
+    //2 words
     @Test
-    public void testEvaluateResultMultipleWords() {
-        assertTrue(test.evaluateResult("red dragon fruit", "Dragon Fruit: Nutrition, Benefits, and How to Eat It - Healthline"));
+    public void testEvaluateResultTwoWords() {
+        String searchTerm = "dragon fruit";
+        bp.setSearchTerm(searchTerm);
+        assertTrue(test.evaluateResultTest(searchTerm, bp.getSearchTitles().get(0)));
+    }
+    
+    //3 words
+    @Test
+    public void testEvaluateResultThreeWords() {
+        String searchTerm = "red dragon fruit";
+        bp.setSearchTerm(searchTerm);
+        assertTrue(test.evaluateResultTest(searchTerm, bp.getSearchTitles().get(0)));
     }
 
 }
