@@ -11,7 +11,7 @@ import org.jsoup.select.Elements;
 
 public class BingParser {
     
-    protected String searchTerm;
+    private String searchTerm;
     
     //constructor that takes a String for the search terms
     public BingParser(String searchTerm) {
@@ -25,13 +25,13 @@ public class BingParser {
     
     
     //Encode the string that will be used to Bing search
-    protected String encodeURL() {
+    private String encodeURL() {
         String encoded = URLEncoder.encode(this.searchTerm, StandardCharsets.UTF_8);
         return "https://www.bing.com/search?q=" + encoded;
     }
     
     //Connect to webpage and get HTML data
-    protected String getWebpageHTML() {
+    private String getWebpageHTML() {
         
         StringBuilder sb = new StringBuilder();
         
@@ -89,6 +89,16 @@ public class BingParser {
     
     public String getSearchTerm() {
         return this.searchTerm;
+    }
+    
+    //public methods used for testing, remove on final build
+    //done this way to enforce public/private within this class
+    public String encodeURLTest() {
+        return this.encodeURL();
+    }
+    
+    public String getWebpageHTMLTest() {
+        return this.getWebpageHTML();
     }
     
 }
