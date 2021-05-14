@@ -87,6 +87,7 @@ public class AutomatedTester {
         return this.testsPassed/this.totalTests;
     }
     
+    //access to private for test purposes
     public boolean evaluateResultTest(String query, SearchResult result) {
         return evaluateResult(query, result);
     }
