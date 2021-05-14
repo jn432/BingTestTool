@@ -49,6 +49,4 @@ public class SearchResult {
         return this.description;
     }
     
-    
-    
 }
