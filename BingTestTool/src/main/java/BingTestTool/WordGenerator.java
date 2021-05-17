@@ -13,7 +13,7 @@ public class WordGenerator {
         //Connect to website
         try {
             //open connection word generator website
-            URL url = new URL("https://randomword.com/");
+            URL url = new URL("https://randomword.com");
             URLConnection con = url.openConnection();
             InputStream stream = con.getInputStream();
             
