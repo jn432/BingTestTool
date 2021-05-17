@@ -47,23 +47,31 @@ public class AutomatedTesterTest {
         assertTrue("Evaluate: red dragon fruit", test.evaluateResultTest(searchTerm, bp.getSearchTitles().get(0)));
     }
     
+    //redundancy
+    @Test
+    public void testEvaluateResultRedundancy() {
+        String searchTerm = "uow wollongong";
+        bp.setSearchTerm(searchTerm);
+        assertTrue("Evaluate: red dragon fruit", test.evaluateResultTest(searchTerm, bp.getSearchTitles().get(0)));
+    }
+    
     //tests for automatic testing
     //1 word
     @Test
     public void testRunTest() {
-        assertTrue("Full Test 1 word", test.runTest(1));
+        assertTrue("Full Test 1 word", test.runTest(1,5));
     }
     
     //2 words
     @Test
     public void testRunTestTwoWords() {
-        assertTrue("Full Test 2 words", test.runTest(2));
+        assertTrue("Full Test 2 words", test.runTest(2,5));
     }
     
     //3 words
     @Test
     public void testRunTestThreeWords() {
-        assertTrue("Full Test 3 words", test.runTest(3));
+        assertTrue("Full Test 3 words", test.runTest(3,5));
     }
 
 }
