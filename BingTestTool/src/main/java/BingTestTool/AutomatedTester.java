@@ -29,13 +29,16 @@ public class AutomatedTester {
     
     //Run a test - return true if results are good, false if they are not
     //Increments curScore and maxScore on whether test passes/fails
-    public boolean runTest() {
-        //generate words
+    public boolean runTest(int numWords) {
+        //generate words for search query
         WordGenerator wordGen = new WordGenerator();
-        String word = wordGen.generateWord();
+        String searchTerm = "";
+        for (int i = 0; i < numWords; i++) {
+            searchTerm += wordGen.generateWord();
+        }
         
         //search queries using Bing
-        BingParser bp = new BingParser(word);
+        BingParser bp = new BingParser(searchTerm);
         ArrayList<SearchResult> results = bp.getSearchTitles();
         
         //SCORING SECTION - VERY BASIC
@@ -43,7 +46,7 @@ public class AutomatedTester {
         
         //compare search query to search results
         for (SearchResult result : results) {
-            boolean test = this.evaluateResult(word, result);
+            boolean test = this.evaluateResult(searchTerm, result);
             //SCORING SECTION - VERY BASIC
             //add 1 if result was success, otherwise add 0
             score += (test ? 1 : 0);
@@ -65,9 +68,9 @@ public class AutomatedTester {
     }
     
     //method to run a set amount of tests
-    public void runTests(int numTests) {
+    public void runTests(int numWords, int numTests) {
         for (int i = 0; i < numTests; i++) {
-            runTest();
+            runTest(numWords);
         }
     }
     
