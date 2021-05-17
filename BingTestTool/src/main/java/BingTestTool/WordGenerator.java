@@ -40,7 +40,6 @@ public class WordGenerator {
         Document doc = Jsoup.parse(this.getHTML());
         //get the randomly generated word in the document
         String word =  doc.select("#random_word").first().text();
-        System.out.println(word);
         return word;
     }   
 }
