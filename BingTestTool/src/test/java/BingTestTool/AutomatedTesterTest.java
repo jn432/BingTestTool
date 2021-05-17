@@ -52,7 +52,7 @@ public class AutomatedTesterTest {
     public void testEvaluateResultRedundancy() {
         String searchTerm = "uow wollongong";
         bp.setSearchTerm(searchTerm);
-        assertTrue("Evaluate: red dragon fruit", test.evaluateResultTest(searchTerm, bp.getSearchTitles().get(0)));
+        assertTrue("Evaluate: uow wollongong", test.evaluateResultTest(searchTerm, bp.getSearchTitles().get(0)));
     }
     
     //tests for automatic testing
