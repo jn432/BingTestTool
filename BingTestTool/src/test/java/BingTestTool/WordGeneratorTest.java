@@ -25,4 +25,17 @@ public class WordGeneratorTest {
         assertFalse(this.test.generateWord().isEmpty());
     }
     
+    //Tests to check if we can generate a word with an error
+    @Test
+    public void testCreateError() {
+        String word = "Pipeline";
+        assertNotEquals("Word error", word, this.test.createError(word));
+    }
+    
+    //Full test
+    @Test
+    public void testGenerateWordWithError() {
+        String word = this.test.generateWord();
+        assertNotEquals("Generate error", word, this.test.createError(word));
+    }
 }

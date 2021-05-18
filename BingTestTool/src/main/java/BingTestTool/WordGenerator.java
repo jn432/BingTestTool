@@ -2,6 +2,7 @@ package BingTestTool;
 
 import java.io.*;
 import java.net.*;
+import java.util.Random;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -41,5 +42,14 @@ public class WordGenerator {
         //get the randomly generated word in the document
         String word =  doc.select("#random_word").first().text();
         return word;
-    }   
+    }
+    
+    public String createError(String word) {
+        Random rng = new Random();
+        int randomNumber = rng.nextInt(word.length());
+        String mistakeWord = word.substring(0, randomNumber)
+            + word.charAt(randomNumber)
+            + word.substring(randomNumber, word.length());
+        return mistakeWord;
+    }
 }
