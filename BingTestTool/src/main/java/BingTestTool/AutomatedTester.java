@@ -77,11 +77,45 @@ public class AutomatedTester {
 
     }
 
-    //method to run a set amount of tests
-    public void runTests(int numWords, int maxResults, int numTests) {
-        for (int i = 0; i < numTests; i++) {
-            runTest(numWords, maxResults);
+    //Similar to runTest, except this one introduces an error for every word
+    public boolean runTestWithError(int maxResults) {
+        //generate words for search query
+        WordGenerator wordGen = new WordGenerator();
+        String searchTerm = wordGen.generateWord();
+        String searchTermMistake = wordGen.createError(searchTerm);
+
+        System.out.println("Search query: " + searchTermMistake);
+
+        //search queries using Bing
+        BingParser bp = new BingParser(searchTermMistake);
+        ArrayList<SearchResult> results = bp.getSearchTitles();
+
+        //SCORING SECTION - VERY BASIC
+        int points = 0;
+        int maxPoints = Math.min(maxResults, results.size());
+
+        //compare search query to search results, with a maximum number stated
+        for (int i = 0; i < maxPoints; i++) {
+            //compare search Term with no errors with the ith search result
+            boolean test = this.evaluateResult(searchTerm, results.get(i));
+            //SCORING SECTION - VERY BASIC
+            //add 1 if result was success, otherwise add 0
+            points += (test ? 1 : 0);
         }
+
+        //add points
+        this.curScore += points;
+        this.maxScore += maxPoints;
+
+        //Counting number of tests passed
+        //add 1 if test scored at least 50%
+        this.testsPassed += ((points * 2 >= maxPoints) ? 1 : 0);
+        //always increment the max score
+        this.totalTests++;
+
+        //return true if tests passed
+        return (points * 2 >= maxPoints);
+
     }
 
     //Getters
