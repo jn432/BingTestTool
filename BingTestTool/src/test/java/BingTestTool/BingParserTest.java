@@ -17,6 +17,7 @@ public class BingParserTest {
 
     @After
     public void tearDown() throws Exception {
+        this.test = null;
     }
 
     
