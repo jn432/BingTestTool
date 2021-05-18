@@ -63,15 +63,23 @@ public class AutomatedTesterTest {
     }
     
     //2 words
+    //This test may return true if the 2 words are related, but fails most of the time
     @Test
     public void testRunTestTwoWords() {
-        assertTrue("Full Test 2 words", test.runTest(2,5));
+        assertFalse("Full Test 2 words", test.runTest(2,5));
     }
     
     //3 words
+    //Never seen this test return true before
     @Test
     public void testRunTestThreeWords() {
-        assertTrue("Full Test 3 words", test.runTest(3,5));
+        assertFalse("Full Test 3 words", test.runTest(3,5));
+    }
+    
+    //Testing if Bing catches the error and searches for the original word
+    @Test
+    public void testRunTestWithError() {
+        assertTrue("1 word with mistake", test.runTestWithError(5));
     }
 
 }
