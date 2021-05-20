@@ -19,18 +19,47 @@ public class AutomatedTester {
 
     //Evaluate whether the search result matches what our query is looking for
     private boolean evaluateResult(String query, SearchResult result) {
-        //for each word in the query, search for it in the link, title and description
-        //if that word does not appear, return false
-        //return true after all searches pass
+        boolean testResult = true;
+        GoogleParser gp = null;
+        //split the search terms into an array of Strings
         String[] words = query.toLowerCase().split(" ");
+        //for each word in the query
         for (String word : words) {
-            if (!(  result.getLink().toLowerCase().contains(word)
+            //search for it in the link, title and description
+            //if it is not found, change testResult to false and first test ends
+            if (!(result.getLink().toLowerCase().contains(word)
                     || result.getTitle().toLowerCase().contains(word)
                     || result.getDescription().toLowerCase().contains(word))) {
-                return false;
+                testResult = false;
+                break;
             }
         }
-        return true;
+
+        //if words do not appear in the link, title and description,
+        //it means testResult is currently false
+        //check if google search returns has the link
+        if (!testResult) {
+            //create GoogleParser object if it has not been created yet
+            if (gp == null) {
+                gp = new GoogleParser(query);
+            }
+
+            //get links from first page of google search    
+            ArrayList<String> googleLinks = gp.getSearchTitles();
+            //if the search result link appears, set testResult to true
+            //and break the loop
+            for (String link : googleLinks) {
+                if (link.equals(result.getLink())) {
+                    testResult = true;
+                    System.out.println("found result in google");
+                    break;
+                }
+            }            
+        }
+        //return the results of the tests
+        //will return true if search results has all the words or
+        //if the link appeared within googles search results first page
+        return testResult;
     }
 
     //Run a test - return true if results are good, false if they are not
