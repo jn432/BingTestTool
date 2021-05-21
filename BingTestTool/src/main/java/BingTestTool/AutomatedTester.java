@@ -8,6 +8,8 @@ public class AutomatedTester {
     private int maxScore;
     private int testsPassed;
     private int totalTests;
+    
+    private String testResults;
 
     //Constructor
     public AutomatedTester() {
@@ -15,6 +17,7 @@ public class AutomatedTester {
         this.maxScore = 0;
         this.testsPassed = 0;
         this.totalTests = 0;
+        this.testResults = "";
     }
 
     //Evaluate whether the search result matches what our query is looking for
@@ -64,103 +67,78 @@ public class AutomatedTester {
 
     //Run a test - return true if results are good, false if they are not
     //Increments curScore and maxScore on whether test passes/fails
-    public boolean runTest(int numWords, int maxResults) {
+    public boolean runTest(int numWords, int maxResults, boolean addError) {
         //generate words for search query
         WordGenerator wordGen = new WordGenerator();
         String searchTerm = "";
+        String searchTermSent = "";
         for (int i = 0; i < numWords; i++) {
-            searchTerm += wordGen.generateWord() + " ";
+            //generate a word
+            String word = wordGen.generateWord();
+            
+            //if we are generating errors, add a mistake to the word
+            if (addError) {
+                searchTermSent += wordGen.createError(word) + " ";
+            }
+            else {
+                searchTermSent += word + " ";
+            }
+            searchTerm += word + " ";
         }
 
-        System.out.println("Search query: " + searchTerm);
+        System.out.println("Search query: " + searchTermSent);
 
         //search queries using Bing
-        BingParser bp = new BingParser(searchTerm);
+        BingParser bp = new BingParser(searchTermSent);
         ArrayList<SearchResult> results = bp.getSearchTitles();
 
-        //SCORING SECTION - VERY BASIC
+        //initialise points and maxPoints
         int points = 0;
-        int maxPoints = Math.min(maxResults, results.size());
+        int maxPoints = 0;
 
         //compare search query to search results, with a maximum number stated
-        for (int i = 0; i < maxPoints; i++) {
+        int max = Math.min(maxResults, results.size());
+        for (int i = 0; i < max; i++) {
             //compare search Term with the ith search result
             boolean test = this.evaluateResult(searchTerm, results.get(i));
-            //SCORING SECTION - VERY BASIC
-            //add 1 if result was success, otherwise add 0
-            points += (test ? 1 : 0);
+            //SCORING SECTION
+            //add points if result was success, otherwise add 0
+            //search results higher on the list have larger weights
+            points += (test ? (max - i) : 0);
+            maxPoints += (max - i);
         }
+        
+        //Pass if the test scored over 50%
+        boolean testPassed = (points * 2 >= maxPoints);
+        
+        //Add test result to the String
+        testResults += "Query: " + searchTermSent +
+                "\t\tResult: " + (testPassed ? "PASS" : "FAIL") + 
+                "\tScore: " + points + "/" + maxPoints + "\n";
 
-        //add points
+        //add points total
         this.curScore += points;
         this.maxScore += maxPoints;
 
         //Counting number of tests passed
-        //add 1 if test scored at least 50%
-        this.testsPassed += ((points * 2 >= maxPoints) ? 1 : 0);
+        //add 1 if test passed
+        this.testsPassed += (testPassed ? 1 : 0);
         //always increment the max score
         this.totalTests++;
 
-        //return true if tests passed
-        return (points * 2 >= maxPoints);
+        //return result of test
+        return testPassed;
 
     }
-
-    //Similar to runTest, except this one introduces an error for every word
-    public boolean runTestWithError(int maxResults) {
-        //generate words for search query
-        WordGenerator wordGen = new WordGenerator();
-        String searchTerm = wordGen.generateWord();
-        String searchTermMistake = wordGen.createError(searchTerm);
-
-        System.out.println("Search query: " + searchTermMistake);
-
-        //search queries using Bing
-        BingParser bp = new BingParser(searchTermMistake);
-        ArrayList<SearchResult> results = bp.getSearchTitles();
-
-        //SCORING SECTION - VERY BASIC
-        int points = 0;
-        int maxPoints = Math.min(maxResults, results.size());
-
-        //compare search query to search results, with a maximum number stated
-        for (int i = 0; i < maxPoints; i++) {
-            //compare search Term with no errors with the ith search result
-            boolean test = this.evaluateResult(searchTerm, results.get(i));
-            //SCORING SECTION - VERY BASIC
-            //add 1 if result was success, otherwise add 0
-            points += (test ? 1 : 0);
-        }
-
-        //add points
-        this.curScore += points;
-        this.maxScore += maxPoints;
-
-        //Counting number of tests passed
-        //add 1 if test scored at least 50%
-        this.testsPassed += ((points * 2 >= maxPoints) ? 1 : 0);
-        //always increment the max score
-        this.totalTests++;
-
-        //return true if tests passed
-        return (points * 2 >= maxPoints);
-
+    
+    public String getSummary() {
+        return "Total score: " + this.curScore + "/" + this.maxScore +
+                "\nTests passed: " + this.testsPassed + "/" + this.totalTests + "\n";
     }
 
-    //Getters
-    //get the score as a fraction
-    public double getScore() {
-        if (this.maxScore == 0) {
-            return 0;
-        }
-        return this.curScore / this.maxScore;
-    }
-
-    public double getTestsPassedFraction() {
-        if (this.totalTests == 0) {
-            return 0;
-        }
-        return this.testsPassed / this.totalTests;
+    //returns the results of the test as a String
+    public String getTestResult() {
+        return testResults;
     }
 
     //access to private for test purposes

@@ -144,11 +144,16 @@ public class MainScreen extends javax.swing.JFrame {
 
     //When button is pressed, search "surprise" in bing
     private void buttonRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRunActionPerformed
-        BingParser bc = new BingParser("surprise");
-        ArrayList<SearchResult> results = bc.getSearchTitles();
-        results.forEach(title -> {
-            textArea.append(title.toString() + '\n');
-        });
+        AutomatedTester tester = new AutomatedTester();
+        for (int i = 0; i < 5; i++) {
+            tester.runTest(2, 5, false);
+            textArea.setText(tester.getTestResult());
+        }
+        textArea.append("\n");
+        textArea.append(tester.getSummary());
+        textArea.append("\n");
+        textArea.append("Testing has finished!\n");
+        
     }//GEN-LAST:event_buttonRunActionPerformed
 
     /**
