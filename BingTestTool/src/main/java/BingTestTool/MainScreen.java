@@ -24,11 +24,12 @@ public class MainScreen extends javax.swing.JFrame {
         buttonRun = new java.awt.Button();
         scrollPanel = new java.awt.ScrollPane();
         textArea = new java.awt.TextArea();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jSpinner1 = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
+        jCheckBoxOneWord = new javax.swing.JCheckBox();
+        jCheckBoxTwoWords = new javax.swing.JCheckBox();
+        jCheckBoxThreeWords = new javax.swing.JCheckBox();
+        jCheckBoxOneWordMistake = new javax.swing.JCheckBox();
+        jSpinnerNumTests = new javax.swing.JSpinner();
+        jSpinnerResultsEvaluated = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -47,11 +48,13 @@ public class MainScreen extends javax.swing.JFrame {
 
         scrollPanel.add(textArea);
 
-        jCheckBox1.setText("jCheckBox1");
+        jCheckBoxOneWord.setText("1 Word");
 
-        jCheckBox2.setText("jCheckBox2");
+        jCheckBoxTwoWords.setText("2 Words");
 
-        jCheckBox3.setText("jCheckBox3");
+        jCheckBoxThreeWords.setText("3 Words");
+
+        jCheckBoxOneWordMistake.setText("1 Word with Mistake");
 
         jLabel1.setText("Number of tests");
 
@@ -77,16 +80,17 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jSpinnerNumTests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jCheckBox2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox3, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox1))
+                                    .addComponent(jCheckBoxTwoWords, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxThreeWords, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxOneWord, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxOneWordMistake, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jSpinnerResultsEvaluated, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
@@ -98,7 +102,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpinnerNumTests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -107,16 +111,18 @@ public class MainScreen extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpinnerResultsEvaluated, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addGap(75, 75, 75))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox1)
+                        .addComponent(jCheckBoxOneWord)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox2)
+                        .addComponent(jCheckBoxTwoWords)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox3)
+                        .addComponent(jCheckBoxThreeWords)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBoxOneWordMistake)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(buttonRun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
@@ -144,16 +150,56 @@ public class MainScreen extends javax.swing.JFrame {
 
     //When button is pressed, search "surprise" in bing
     private void buttonRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRunActionPerformed
+        //Disable button to prevent multiple activations
+        buttonRun.setEnabled(false);
+        
+        //create automated tester
         AutomatedTester tester = new AutomatedTester();
-        for (int i = 0; i < 5; i++) {
-            tester.runTest(2, 5, false);
-            textArea.setText(tester.getTestResult());
+
+        //run 1 word tests if enabled
+        if (jCheckBoxOneWord.isSelected()) {
+            //run 1 word tests and print results
+            for (int i = 0; i < (int) jSpinnerNumTests.getValue(); i++) {
+                tester.runTest(1, (int) jSpinnerResultsEvaluated.getValue(), false);
+                textArea.setText(tester.getTestResult());
+            }
         }
+        
+        //run 2 word tests if enabled
+        if (jCheckBoxTwoWords.isSelected()) {
+            //run 1 word tests and print results
+            for (int i = 0; i < (int) jSpinnerNumTests.getValue(); i++) {
+                tester.runTest(2, (int) jSpinnerResultsEvaluated.getValue(), false);
+                textArea.setText(tester.getTestResult());
+            }
+        }
+        
+        //run 3 word tests if enabled
+        if (jCheckBoxThreeWords.isSelected()) {
+            //run 1 word tests and print results
+            for (int i = 0; i < (int) jSpinnerNumTests.getValue(); i++) {
+                tester.runTest(3, (int) jSpinnerResultsEvaluated.getValue(), false);
+                textArea.setText(tester.getTestResult());
+            }
+        }
+        
+        //run 1 word tests with mistakes if enabled
+        if (jCheckBoxOneWordMistake.isSelected()) {
+            //run 1 word tests and print results
+            for (int i = 0; i < (int) jSpinnerNumTests.getValue(); i++) {
+                tester.runTest(1, (int) jSpinnerResultsEvaluated.getValue(), true);
+                textArea.setText(tester.getTestResult());
+            }
+        }
+        
+        //print summary of results
         textArea.append("\n");
         textArea.append(tester.getSummary());
         textArea.append("\n");
         textArea.append("Testing has finished!\n");
-        
+
+        //Enable button after tests have finished running
+        buttonRun.setEnabled(true);
     }//GEN-LAST:event_buttonRunActionPerformed
 
     /**
@@ -193,15 +239,16 @@ public class MainScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button buttonRun;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBoxOneWord;
+    private javax.swing.JCheckBox jCheckBoxOneWordMistake;
+    private javax.swing.JCheckBox jCheckBoxThreeWords;
+    private javax.swing.JCheckBox jCheckBoxTwoWords;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JSpinner jSpinnerNumTests;
+    private javax.swing.JSpinner jSpinnerResultsEvaluated;
     private java.awt.ScrollPane scrollPanel;
     private java.awt.TextArea textArea;
     // End of variables declaration//GEN-END:variables
