@@ -1,6 +1,8 @@
 package BingTestTool;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.Instant;
 
 public class MainScreen extends javax.swing.JFrame {
 
@@ -195,6 +197,20 @@ public class MainScreen extends javax.swing.JFrame {
         //print summary of results
         textArea.append("\n");
         textArea.append(tester.getSummary());
+        
+        //Create log file of test
+        long unixTimestamp = Instant.now().getEpochSecond();
+        try {
+            String filename = "test log - " + unixTimestamp + ".txt";
+            PrintWriter writer = new PrintWriter(filename,"UTF-8");
+            writer.println(textArea.getText());
+            writer.close();
+            textArea.append("\nLog file saved as: " + filename);
+        }
+        catch (IOException e) {
+            textArea.append("\nCould not save log file");
+        }
+        
         textArea.append("\n");
         textArea.append("Testing has finished!\n");
 
