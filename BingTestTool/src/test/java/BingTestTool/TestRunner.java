@@ -1,6 +1,7 @@
 package BingTestTool;
 
-//This class is for actually running the tests
+//This class can be used to run all tests
+//You can also right click > Run test on individual test files
 //To run in netbeans, right click the .java and click Run File
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
@@ -28,6 +29,13 @@ public class TestRunner {
         
         //AutomatedTesterTest
         result = JUnitCore.runClasses(AutomatedTesterTest.class);
+        System.out.println("Is AutomatedTester test successful?: " + result.wasSuccessful());
+        for (Failure failure : result.getFailures()) {
+            System.out.println("Failure: " + failure.toString());
+        }
+        
+        //GoogleParserTest
+        result = JUnitCore.runClasses(GoogleParserTest.class);
         System.out.println("Is AutomatedTester test successful?: " + result.wasSuccessful());
         for (Failure failure : result.getFailures()) {
             System.out.println("Failure: " + failure.toString());

@@ -153,7 +153,7 @@ public class MainScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //When button is pressed, search "surprise" in bing
+    //Run tests when the button is clicked
     private void buttonRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRunActionPerformed
         //clear text area
         textArea.setText("");

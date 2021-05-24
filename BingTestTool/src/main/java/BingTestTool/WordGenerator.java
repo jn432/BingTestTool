@@ -1,3 +1,5 @@
+//Code structure built similarly to BingParser
+
 package BingTestTool;
 
 import java.io.*;
@@ -14,6 +16,8 @@ public class WordGenerator {
         //Connect to website
         try {
             //open connection word generator website
+            //vocabulary used to reduce range of words, removing medical terms
+            //or other very obscure words, improves testing for 2+ words
             URL url = new URL("https://randomword.com/vocabulary");
             URLConnection con = url.openConnection();
             InputStream stream = con.getInputStream();
@@ -44,9 +48,13 @@ public class WordGenerator {
         return word;
     }
     
+    //adds an extra letter to the word to simulate typing error
     public String createError(String word) {
         Random rng = new Random();
+        //pick a random location within the String
         int randomNumber = rng.nextInt(word.length());
+        //add a duplicate letter at that location
+        //eg. random number is 4, word is pipeline, returns pipelline
         String mistakeWord = word.substring(0, randomNumber)
             + word.charAt(randomNumber)
             + word.substring(randomNumber, word.length());

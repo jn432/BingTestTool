@@ -1,3 +1,5 @@
+//Original code idea - https://system.camp/tutorial/searching-google-results-and-parsing-in-java/
+
 package BingTestTool;
 
 import java.io.*;

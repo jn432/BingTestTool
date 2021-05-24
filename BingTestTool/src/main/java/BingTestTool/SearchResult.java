@@ -1,3 +1,6 @@
+//Wrapper class
+//Simple class that does not need exhaustive testing in TTD
+
 package BingTestTool;
 
 public class SearchResult {
@@ -16,11 +19,6 @@ public class SearchResult {
     //Default constructor
     public SearchResult() {
         
-    }
-    
-    @Override
-    public String toString() {
-        return this.link + " ||| " + this.title + " ||| " + this.description;
     }
     
     //Setters
