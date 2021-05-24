@@ -58,10 +58,10 @@ public class MainScreen extends javax.swing.JFrame {
 
         jCheckBoxOneWordMistake.setText("1 Word with Mistake");
 
-        jSpinnerNumTests.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jSpinnerNumTests.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jSpinnerNumTests.setModel(new javax.swing.SpinnerNumberModel(3, 1, null, 1));
 
-        jSpinnerResultsEvaluated.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jSpinnerResultsEvaluated.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jSpinnerResultsEvaluated.setModel(new javax.swing.SpinnerNumberModel(5, 1, 10, 1));
         jSpinnerResultsEvaluated.setToolTipText("");
 
@@ -122,14 +122,13 @@ public class MainScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBoxThreeWords)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBoxOneWordMistake)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jCheckBoxOneWordMistake))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jSpinnerResultsEvaluated, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jSpinnerResultsEvaluated, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonRun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
